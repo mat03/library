@@ -4,7 +4,7 @@ import views.controller.AuthorController;
 
 import java.io.IOException;
 
-public class Demo {
+public class AppLauncher {
     public static void main(String[] args) throws IOException {
         AuthorController authorController = new AuthorController();
 
