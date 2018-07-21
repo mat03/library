@@ -7,21 +7,24 @@ import org.codehaus.jackson.type.TypeReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AuthorRepository implements IAuthorRepository {
-    private static final String JSON_FILEPATH = new String("./persistence/src/main/resources/database/authors.json");
+    private static final String JSON_FILEPATH = "./persistence/src/main/resources/database/authors.json";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
+    @Override
     public void add(Author author) throws IOException {
-        List<Author> authors = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Author>>(){});
+        File jsonFile = new File(JSON_FILEPATH);
+        List<Author> authors = OBJECT_MAPPER.readValue(jsonFile, new TypeReference<List<Author>>(){});
 
-        author.setId(new Long((authors.size())));
+        author.setId((long) authors.size());
         authors.add(author);
-        OBJECT_MAPPER.writeValue(new File(JSON_FILEPATH),authors);
+        OBJECT_MAPPER.writeValue(jsonFile, authors);
     }
 
+    @Override
     public void remove(Long id) throws IOException {
         List<Author> authors = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Author>>(){});
 
@@ -31,25 +34,26 @@ public class AuthorRepository implements IAuthorRepository {
                 return;
             }
         }
-        throw new AuthorException("Can't remove ID" + id);
+        throw new AuthorException("Can't remove ID " + id);
     }
 
+    @Override
     public Author get(Long id) throws IOException {
         List<Author> authors = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Author>>(){});
 
-        for (int i = 0; i < authors.size(); ++i)
-        {
-            if(authors.get(i).getId() == id)
+        for (Author author : authors) {
+            if(author.getId().equals(id))
             {
-                return authors.get(i);
+                return author;
             }
         }
-
-        throw new AuthorException("ID not exist");
+        throw new AuthorException("ID not exist" + id);
     }
 
+    @Override
     public void update(Author author) throws IOException {
-        List<Author> authors = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Author>>(){});
+        File jsonFile = new File(JSON_FILEPATH);
+        List<Author> authors = OBJECT_MAPPER.readValue(jsonFile, new TypeReference<List<Author>>(){});
 
         for (Author a : authors) {
             if (a.getId().equals(author.getId())) {
@@ -58,18 +62,18 @@ public class AuthorRepository implements IAuthorRepository {
                 a.setBirthPlace(author.getBirthPlace());
                 a.setRemove(author.isRemove());
 
-                OBJECT_MAPPER.writeValue(new File(JSON_FILEPATH),authors);
+                OBJECT_MAPPER.writeValue(jsonFile,authors);
                 return;
             }
         }
         throw new AuthorException("Update Fails ");
     }
 
+    @Override
     public List<Author> getAll() throws IOException {
         List<Author> authors = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Author>>(){});
-        ArrayList<Author> res;
 
-        res = (ArrayList<Author>) authors.stream().filter(author -> author.isRemove() == false);
-        return res;
+        return authors.stream().filter(author -> !author.isRemove()).collect(Collectors.toList());
+
     }
 }

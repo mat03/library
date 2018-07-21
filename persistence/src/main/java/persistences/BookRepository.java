@@ -1,46 +1,81 @@
 package persistences;
 
-import models.Author;
+import exceptions.BookException;
 import models.Book;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookRepository implements IBookRepository {
-    private static final String JSON_FILEPATH = new String("./persistence/src/main/resources/database/books.json");
+    private static final String JSON_FILEPATH = "./persistence/src/main/resources/database/books.json";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Override
     public void add(Book book) throws IOException {
-        List<Book> books = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Book>>(){});
+        File jsonFile = new File(JSON_FILEPATH);
+        List<Book> books = OBJECT_MAPPER.readValue(jsonFile, new TypeReference<List<Book>>(){});
 
-        book.setId(new Long(books.size()));
+        book.setId((long) books.size());
         books.add(book);
 
-        OBJECT_MAPPER.writeValue(new File(JSON_FILEPATH),books);
+        OBJECT_MAPPER.writeValue(jsonFile, books);
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(Long id) throws IOException {
+        List<Book> books = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Book>>() {});
 
+        for (Book book : books) {
+            if(book.getId().equals(id)) {
+                book.setRemoved(true);
+                return;
+            }
+        }
+        throw new BookException("Can't remowe ID " + id);
     }
 
     @Override
-    public void update(Book book) {
+    public void update(Book book) throws IOException {
+        File jsonFile = new File(JSON_FILEPATH);
+        List<Book> books = OBJECT_MAPPER.readValue(jsonFile, new TypeReference<List<Book>>() {});
 
+        for (Book b : books) {
+            if(b.getId().equals(book.getId())) {
+                b.setTitle(book.getTitle());
+                b.setPublishDate(book.getPublishDate());
+                b.setIsbn(book.getIsbn());
+                b.setGenre(book.getGenre());
+                b.setNumberOfPages(book.getNumberOfPages());
+                b.setDescription(book.getDescription());
+                b.setRemoved(book.isRemoved());
+                b.setBorrowed(book.isBorrowed());
+
+                OBJECT_MAPPER.writeValue(jsonFile, books );
+                return;
+            }
+        }
+        throw new BookException("Update Fails ");
     }
 
     @Override
-    public Book get(Long id) {
-        return null;
+    public Book get(Long id) throws IOException {
+        List<Book> books = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Book>>() {});
+
+        for (Book book : books) {
+            if(book.getId().equals(id)) {
+                return book;
+            }
+        }
+        throw new BookException("ID not exist " + id);
     }
 
-    @Override
-    public ArrayList<Book> getAll() {
-        return null;
+    public List<Book> getAll() throws IOException {
+        List<Book> books = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Book>>() {});
+
+        return books.stream().filter(book -> !book.isBorrowed()).collect(Collectors.toList());
     }
 }

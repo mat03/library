@@ -2,12 +2,13 @@ package persistences;
 
 import models.Borrower;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.List;
 
 public interface IBorrowerRepository {
-    void add(Borrower borrower);
+    void add(Borrower borrower) throws IOException;
     void remove(Long id);
     void update(Borrower borrower);
     Borrower get(Long id);
-    ArrayList<Borrower> getAll();
+    List<Borrower> getAll();
 }

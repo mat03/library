@@ -12,11 +12,13 @@ public class Borrow {
     private Date rentalDate;
     private Long bookId;
     private Long borrowerId;
+    private boolean remove;
 
     public Borrow(Long id, Date rentalDate, Long bookId, Long borrowerId) {
         this.id = id;
         this.rentalDate = rentalDate;
         this.bookId = bookId;
         this.borrowerId = borrowerId;
+        this.remove = false;
     }
 }

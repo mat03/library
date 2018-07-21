@@ -31,9 +31,17 @@ public class Book {
         this.borrowed = false;
     }
 
-    
+    public Book(String title, Date publishDate, Long isbn, BookGenre genre, Long numberOfPages, String description, boolean removed, boolean borrowed) {
+        this.title = title;
+        this.publishDate = publishDate;
+        this.isbn = isbn;
+        this.genre = genre;
+        this.numberOfPages = numberOfPages;
+        this.description = description;
+        this.removed = removed;
+        this.borrowed = borrowed;
+    }
 
-
-
-
+    public Book() {
+    }
 }
