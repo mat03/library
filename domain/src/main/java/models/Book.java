@@ -16,6 +16,8 @@ public class Book {
     private BookGenre genre;
     private Long numberOfPages;
     private String description;
+    private boolean removed;
+    private boolean borrowed;
 
     public Book(Long id, String title, Date publishDate, Long isbn, BookGenre genre, Long numberOfPages, String description) {
         this.id = id;
@@ -25,5 +27,13 @@ public class Book {
         this.genre = genre;
         this.numberOfPages = numberOfPages;
         this.description = description;
+        this.removed = false;
+        this.borrowed = false;
     }
+
+    
+
+
+
+
 }
