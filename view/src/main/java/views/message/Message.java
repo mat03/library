@@ -16,6 +16,8 @@ public class Message {
     public static final String NEW_BOOK_NUMBER_PAGE = "Book page number\n";
     public static final String NEW_BOOK_DESCRIPTION = "Book description\n";
 
+    public static final String BOOK_IS_BORROWED = "Book is borrowed\n";
+
     public static final String NEW_AUTHOR_NAME = "Author name\n";
     public static final String NEW_AUTHOR_SURNAME = "Author surname\n";
     public static final String NEW_AUTHOR_BIRTHPLACE = "Author birthplace\n";

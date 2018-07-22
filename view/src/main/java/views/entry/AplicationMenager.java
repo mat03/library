@@ -18,6 +18,9 @@ import static enums.BookGenre.Horror;
 public class AplicationMenager {
     private static final Scanner sc = KeyboardReader.getInstance();
 
+    private static final BookController bookController = new BookController();
+    private static final AuthorController authorController = new AuthorController();
+
     public State initState() {
         do {
             System.out.println(Message.WELCOME_MESSAGE);
@@ -53,10 +56,8 @@ public class AplicationMenager {
     }
 
     public State addBookAuthorState() {
-        AuthorController ac = new AuthorController();
-
         do {
-            List<Author> authors = ac.allAuthors();
+            List<Author> authors = authorController.allAuthors();
             System.out.println(Message.ALL_AUTHORS);
             for(int i = 0; i < authors.size(); ++i)
             {
@@ -81,7 +82,6 @@ public class AplicationMenager {
 
     public State addNewAuthorState() {
         String name, surname, birthPlace;
-        AuthorController authorController = new AuthorController();
 
         System.out.println(Message.NEW_AUTHOR_NAME);
         name = sc.next();
@@ -104,7 +104,6 @@ public class AplicationMenager {
         BookGenre genre;
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-dd-MM");
-        BookController bookController = new BookController();
 
         System.out.println(Message.NEW_BOOK_TITLE);
         title = sc.nextLine();
@@ -132,6 +131,13 @@ public class AplicationMenager {
 
         bookController.addBook(title, date, isbn, Horror, numberOfPages, description);
         return State.EXIT;
+    }
+
+    public State removeBookState() {
+        Long id = 0L;
+        bookController.removeBook(id);
+
+        return  State.EXIT;
     }
 
 }
