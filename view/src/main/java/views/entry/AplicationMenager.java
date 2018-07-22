@@ -147,7 +147,11 @@ public class AplicationMenager {
     public State borrowBookState() {
         List<Borrower> borrowers = borrowerController.allBorrowers();
 
+        for (Borrower borrower: borrowers) {
+            System.out.println(borrower.toString());
+        }
         
+
         return State.EXIT;
     }
 
