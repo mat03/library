@@ -3,14 +3,14 @@ package views.entry;
 import java.util.Scanner;
 
 public class KeyboardReader {
-    private final static KeyboardReader ourInstance = new KeyboardReader();
+    private static Scanner sc = null;
 
-    public static KeyboardReader getInstance() {
+    public static Scanner getInstance() {
 
-        return ourInstance;
+        if(sc == null) {
+            sc = new Scanner(System.in);
+        }
+        return sc;
     }
 
-    KeyboardReader() {
-        Scanner scanner = new Scanner(System.in);
-    }
 }

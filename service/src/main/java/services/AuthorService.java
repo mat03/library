@@ -15,8 +15,8 @@ public class AuthorService implements IAuthorService {
         authorRepository.add(author);
     }
 
-    public void allAuthors() throws IOException {
-        authorRepository.getAll();
+    public List<Author> allAuthors() throws IOException {
+        return authorRepository.getAll();
     }
 
     public Author getAuthors(String name, String surname) throws IOException {
