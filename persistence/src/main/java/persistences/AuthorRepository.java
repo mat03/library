@@ -1,9 +1,12 @@
 package persistences;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import exceptions.AuthorException;
 import models.Author;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +16,11 @@ import java.util.stream.Collectors;
 public class AuthorRepository implements IAuthorRepository {
     private static final String JSON_FILEPATH = "./persistence/src/main/resources/database/authors.json";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    public AuthorRepository() {
+        OBJECT_MAPPER.registerModule(new JavaTimeModule());
+        OBJECT_MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    }
 
     @Override
     public void add(Author author) throws IOException {
@@ -74,6 +82,5 @@ public class AuthorRepository implements IAuthorRepository {
         List<Author> authors = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Author>>(){});
 
         return authors.stream().filter(author -> !author.isRemove()).collect(Collectors.toList());
-
     }
 }

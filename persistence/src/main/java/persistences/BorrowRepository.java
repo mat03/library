@@ -1,9 +1,11 @@
 package persistences;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import exceptions.BorrowException;
 import models.Borrow;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +15,11 @@ import java.util.stream.Collectors;
 public class BorrowRepository implements IBorrowRepository{
     private static final String JSON_FILEPATH = "./persistence/src/main/resources/database/borrows.json";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    public BorrowRepository() {
+        OBJECT_MAPPER.registerModule(new JavaTimeModule());
+        OBJECT_MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    }
 
     @Override
     public void add(Borrow borrow) throws IOException {
