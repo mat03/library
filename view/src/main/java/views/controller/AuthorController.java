@@ -16,7 +16,7 @@ public class AuthorController {
     }
 
     public void addAuthor(String name, String surname, String placeOfBirght) {
-        Author author = new Author("mama", "tata","Krak");
+        Author author = new Author(name, surname, placeOfBirght);
 
         try {
             authorService.addAuthor(author);

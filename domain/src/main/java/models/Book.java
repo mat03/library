@@ -19,8 +19,7 @@ public class Book {
     private boolean removed;
     private boolean borrowed;
 
-    public Book(Long id, String title, Date publishDate, Long isbn, BookGenre genre, Long numberOfPages, String description) {
-        this.id = id;
+    public Book(String title, Date publishDate, Long isbn, BookGenre genre, Long numberOfPages, String description) {
         this.title = title;
         this.publishDate = publishDate;
         this.isbn = isbn;

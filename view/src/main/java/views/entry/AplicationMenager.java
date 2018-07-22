@@ -1,13 +1,19 @@
 package views.entry;
 
+import enums.BookGenre;
 import models.Author;
 import views.controller.AuthorController;
 import views.controller.BookController;
 import views.enums.State;
 import views.message.Message;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
+import static enums.BookGenre.Horror;
 
 public class AplicationMenager {
     private static final Scanner sc = KeyboardReader.getInstance();
@@ -92,9 +98,39 @@ public class AplicationMenager {
     }
 
     public State addNewBookState() {
-
+        String title, description, publishDateStr;
+        Date publishDate;
+        Long isbn, numberOfPages;
+        BookGenre genre;
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-dd-MM");
         BookController bookController = new BookController();
-        bookController.addBook();
+
+        System.out.println(Message.NEW_BOOK_TITLE);
+        title = sc.nextLine();
+
+        System.out.println(Message.NEW_BOOK_PUBLISH_DATE);
+        publishDateStr = sc.nextLine();
+
+        try {
+            date = sdf.parse(publishDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(Message.NEW_BOOK_ISBN);
+        isbn = sc.nextLong();
+
+        System.out.println(Message.NEW_BOOK_TYPE);
+        //genre = new BookGenre("aaa");
+
+        System.out.println(Message.NEW_BOOK_NUMBER_PAGE);
+        numberOfPages = sc.nextLong();
+
+        System.out.println(Message.NEW_BOOK_DESCRIPTION);
+        description = sc.next();
+
+        bookController.addBook(title, date, isbn, Horror, numberOfPages, description);
         return State.EXIT;
     }
 
