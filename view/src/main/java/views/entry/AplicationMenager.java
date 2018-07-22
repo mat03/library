@@ -2,8 +2,11 @@ package views.entry;
 
 import enums.BookGenre;
 import models.Author;
+import models.Borrow;
+import models.Borrower;
 import views.controller.AuthorController;
 import views.controller.BookController;
+import views.controller.BorrowerController;
 import views.enums.State;
 import views.message.Message;
 
@@ -20,6 +23,7 @@ public class AplicationMenager {
 
     private static final BookController bookController = new BookController();
     private static final AuthorController authorController = new AuthorController();
+    private static final BorrowerController borrowerController = new BorrowerController();
 
     public State initState() {
         do {
@@ -138,6 +142,13 @@ public class AplicationMenager {
         bookController.removeBook(id);
 
         return  State.EXIT;
+    }
+
+    public State borrowBookState() {
+        List<Borrower> borrowers = borrowerController.allBorrowers();
+
+        
+        return State.EXIT;
     }
 
 }
