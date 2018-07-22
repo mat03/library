@@ -12,6 +12,7 @@ public class Borrower {
     private String address;
     private Long phone;
     private String email;
+    private boolean remove;
 
     public Borrower(Long id, String name, String surname, String address, Long phone, String email) {
         this.id = id;
@@ -20,5 +21,6 @@ public class Borrower {
         this.address = address;
         this.phone = phone;
         this.email = email;
+        this.remove = false;
     }
 }
