@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class AppLauncher {
     public static void main(String[] args) throws IOException {
-        //AuthorController authorController = new AuthorController();
-        //authorController.addAuthor("MAMa","tata","123");
+        AplicationMenager aplicationMenager = new AplicationMenager();
+        aplicationMenager.runApplication();
     }
 }

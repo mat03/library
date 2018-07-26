@@ -25,7 +25,40 @@ public class AplicationMenager {
     private static final AuthorController authorController = new AuthorController();
     private static final BorrowerController borrowerController = new BorrowerController();
 
+    public AplicationMenager() {
+    }
+
+    public void runApplication() {
+        State state = State.INIT;
+
+        do {
+            switch (state) {
+                case INIT: {
+                    state = initState();
+                    break;
+                }
+                case TRY_ADD_NEW_BOOK: {
+                    state = tryAddNewBookState();
+                    break;
+                }
+                case ADD_BOOK: {
+                    state = addBookState();
+                    break;
+                }
+                case ADD_AUTHOR: {
+                    state = addAuthorState();
+                    break;
+                }
+                case EXIT:
+                    exitAplication();
+            }
+
+        }while (true);
+    }
+
+
     public State initState() {
+
         do {
             System.out.println(Message.WELCOME_MESSAGE);
             int readKey = sc.nextInt();
@@ -33,7 +66,7 @@ public class AplicationMenager {
 
             switch (readKey) {
                 case 1: {
-                    return State.ADD_BOOK;
+                    return State.TRY_ADD_NEW_BOOK;
                 }
                 case 2: {
                     return State.REMOVE_BOOK;
@@ -51,7 +84,6 @@ public class AplicationMenager {
                     System.out.println(Message.WRONG_KEY);
                 }
             }
-
         }while (true);
     }
 
@@ -59,7 +91,7 @@ public class AplicationMenager {
         System.exit(0);
     }
 
-    public State addBookAuthorState() {
+    public State tryAddNewBookState() {
         do {
             List<Author> authors = authorController.allAuthors();
             System.out.println(Message.ALL_AUTHORS);
@@ -84,7 +116,7 @@ public class AplicationMenager {
         } while (true);
     }
 
-    public State addNewAuthorState() {
+    public State addAuthorState() {
         String name, surname, birthPlace;
 
         System.out.println(Message.NEW_AUTHOR_NAME);
@@ -101,7 +133,7 @@ public class AplicationMenager {
         return State.EXIT;
     }
 
-    public State addNewBookState() {
+    public State addBookState() {
         String title, description, publishDateStr;
         Date publishDate;
         Long isbn, numberOfPages;
