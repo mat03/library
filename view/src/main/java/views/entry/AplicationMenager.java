@@ -31,6 +31,8 @@ public class AplicationMenager {
     public void runApplication() {
         State state = State.INIT;
 
+        Author author = new Author();
+
         do {
             switch (state) {
                 case INIT: {
@@ -38,7 +40,7 @@ public class AplicationMenager {
                     break;
                 }
                 case TRY_ADD_NEW_BOOK: {
-                    state = tryAddNewBookState();
+                    state = tryAddNewBookState(author);
                     break;
                 }
                 case ADD_BOOK: {
@@ -61,9 +63,15 @@ public class AplicationMenager {
 
         do {
             System.out.println(Message.WELCOME_MESSAGE);
-            int readKey = sc.nextInt();
-            sc.nextLine();
-
+            int readKey;
+            try {
+                readKey = sc.nextInt();
+            }catch (Exception e) {
+                System.out.println(Message.WRONG_KEY);
+                return State.INIT;
+            }finally {
+                sc.nextLine();
+            }
             switch (readKey) {
                 case 1: {
                     return State.TRY_ADD_NEW_BOOK;
@@ -81,7 +89,7 @@ public class AplicationMenager {
                     return State.EXIT;
                 }
                 default: {
-                    System.out.println(Message.WRONG_KEY);
+                    return State.INIT;
                 }
             }
         }while (true);
@@ -91,26 +99,33 @@ public class AplicationMenager {
         System.exit(0);
     }
 
-    public State tryAddNewBookState() {
+    public State tryAddNewBookState(Author author) {
         do {
             List<Author> authors = authorController.allAuthors();
             System.out.println(Message.ALL_AUTHORS);
             for(int i = 0; i < authors.size(); ++i)
             {
-                System.out.println(i + " - " + authors.get(i).getName());
+                System.out.println(authors.get(i).getId() + " - " + authors.get(i).getName());
             }
 
             System.out.println(Message.ADD_NEW_AUTHOR);
 
             int choseAuthor = sc.nextInt();
             sc.nextLine();
-            Author author = authors.get(choseAuthor);
-            if(choseAuthor == 0) {
 
+            if(choseAuthor == 0) {
                 return State.ADD_AUTHOR;
             }
             else {
-                return State.ADD_BOOK;
+                if(authors.size() <= choseAuthor) {
+                    author = authors.get(choseAuthor - 1);
+                    return State.ADD_BOOK;
+                }
+                else {
+                    System.out.println(Message.ADD_NEW_AUTHOR_WORNING);
+                    return State.ADD_AUTHOR;
+                }
+
             }
 
         } while (true);
@@ -130,7 +145,7 @@ public class AplicationMenager {
 
         authorController.addAuthor(name, surname, birthPlace);
 
-        return State.EXIT;
+        return State.TRY_ADD_NEW_BOOK;
     }
 
     public State addBookState() {

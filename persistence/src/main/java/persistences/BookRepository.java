@@ -25,8 +25,9 @@ public class BookRepository implements IBookRepository {
     public void add(Book book) throws IOException {
         File jsonFile = new File(JSON_FILEPATH);
         List<Book> books = OBJECT_MAPPER.readValue(jsonFile, new TypeReference<List<Book>>(){});
+        long id = books.size();
 
-        book.setId((long) books.size());
+        book.setId(++id);
         books.add(book);
 
         OBJECT_MAPPER.writeValue(jsonFile, books);

@@ -26,8 +26,9 @@ public class AuthorRepository implements IAuthorRepository {
     public void add(Author author) throws IOException {
         File jsonFile = new File(JSON_FILEPATH);
         List<Author> authors = OBJECT_MAPPER.readValue(jsonFile, new TypeReference<List<Author>>(){});
+        Long id = (long)authors.size();
 
-        author.setId((long) authors.size());
+        author.setId(++id);
         authors.add(author);
         OBJECT_MAPPER.writeValue(jsonFile, authors);
     }

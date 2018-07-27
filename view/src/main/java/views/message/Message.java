@@ -6,6 +6,7 @@ public class Message {
 
     public static final String ALL_AUTHORS = "List of all authors\n";
     public static final String ADD_NEW_AUTHOR = "Press 0 to add new author\n";
+    public static final String ADD_NEW_AUTHOR_WORNING = "There is no selectet autor number\n";
 
     public static final String COMMUNICATION_FAIL = "Communication fails\n";
 

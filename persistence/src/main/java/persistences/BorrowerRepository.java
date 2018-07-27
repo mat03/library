@@ -25,8 +25,9 @@ public class BorrowerRepository implements IBorrowerRepository {
     public void add(Borrower borrower) throws IOException {
         File jsonFile = new File(JSON_FILEPATH);
         List<Borrower> borrowers = OBJECT_MAPPER.readValue(jsonFile, new TypeReference<List<Borrower>>(){});
+        long id = borrowers.size();
 
-        borrower.setId((long) borrowers.size());
+        borrower.setId(++id);
         borrowers.add(borrower);
         OBJECT_MAPPER.writeValue(jsonFile,borrowers);
     }
