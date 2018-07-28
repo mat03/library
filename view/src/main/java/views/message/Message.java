@@ -11,7 +11,8 @@ public class Message {
     public static final String COMMUNICATION_FAIL = "Communication fails\n";
 
     public static final String NEW_BOOK_TITLE = "Book title\n";
-    public static final String NEW_BOOK_PUBLISH_DATE = "Book publish date\n";
+    public static final String NEW_BOOK_PUBLISH_DATE = "Book publish date\nyyyy-dd-MM\n";
+    public static final String NEW_BOOK_PUBLISH_DATE_ERROR = "Wrong format of publish date\nPleas use yyyy-dd-MM\n";
     public static final String NEW_BOOK_ISBN = "Book isbn\n";
     public static final String NEW_BOOK_TYPE = "Book type\n";
     public static final String NEW_BOOK_NUMBER_PAGE = "Book page number\n";

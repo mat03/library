@@ -150,7 +150,6 @@ public class AplicationMenager {
 
     public State addBookState() {
         String title, description, publishDateStr;
-        Date publishDate;
         Long isbn, numberOfPages;
         BookGenre genre;
         Date date = new Date();
@@ -160,12 +159,13 @@ public class AplicationMenager {
         title = sc.nextLine();
 
         System.out.println(Message.NEW_BOOK_PUBLISH_DATE);
-        publishDateStr = sc.nextLine();
 
         try {
+            publishDateStr = sc.nextLine();
             date = sdf.parse(publishDateStr);
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println(Message.NEW_BOOK_PUBLISH_DATE_ERROR);
+            return State.ADD_BOOK;
         }
 
         System.out.println(Message.NEW_BOOK_ISBN);
@@ -181,7 +181,7 @@ public class AplicationMenager {
         description = sc.next();
 
         bookController.addBook(title, date, isbn, Horror, numberOfPages, description);
-        return State.EXIT;
+        return State.INIT;
     }
 
     public State removeBookState() {
