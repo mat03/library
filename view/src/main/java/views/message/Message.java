@@ -31,4 +31,11 @@ public class Message {
     public static final String BORROW_BOOK = "Write 0 to add borrower";
     public static final String BORROW_BOOK_NO_BORROWER = "Borrower list is empty add someone";
 
+    public static final String ADD_BORROWER_NEW = "Add new Borrower";
+    public static final String ADD_BORROWER_NAME = "Write Name";
+    public static final String ADD_BORROWER_SURNAME = "Write Surname";
+    public static final String ADD_BORROWER_ADDRESS = "Write Address";
+    public static final String ADD_BORROWER_Phone = "Write Phone";
+    public static final String ADD_BORROWER_EMAIL = "Write Email";
+
 }

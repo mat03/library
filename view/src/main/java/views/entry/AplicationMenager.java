@@ -233,9 +233,8 @@ public class AplicationMenager {
         if(borrowerSize == 0) {
             System.out.println(Message.BORROW_BOOK_NO_BORROWER);
         } else {
-
-            for (Borrower borrower : borrowers) {
-                System.out.println(borrower.toString());
+            for (int i = 0; i < borrowerSize; ++i) {
+                System.out.println(borrowers.get(i).getId() + " -> " + borrowers.get(i).getName() + ", " + borrowers.get(i).getSurname());
             }
         }
 
@@ -252,8 +251,27 @@ public class AplicationMenager {
     public State AddBorrowerState() {
         String name, surname, address, email;
         Long phone;
-        Borrower borrower = new Borrower();
 
+        System.out.println(Message.ADD_BORROWER_NEW);
+
+        System.out.println(Message.ADD_BORROWER_NAME);
+        name = sc.nextLine();
+
+        System.out.println(Message.ADD_BORROWER_SURNAME);
+        surname = sc.nextLine();
+
+        System.out.println(Message.ADD_BORROWER_ADDRESS);
+        address = sc.nextLine();
+
+        System.out.println(Message.ADD_BORROWER_Phone);
+        phone = sc.nextLong();
+        sc.nextLine();
+
+        System.out.println(Message.ADD_BORROWER_EMAIL);
+        email = sc.nextLine();
+
+        Borrower borrower = new Borrower(name,surname,address,phone,email);
+        borrowerController.addBorrower(borrower);
 
         return State.BORROW_BOOK;
     }

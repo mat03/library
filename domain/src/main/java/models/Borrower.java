@@ -28,4 +28,12 @@ public class Borrower {
 
     public Borrower() {
     }
+
+    public Borrower(String name, String surname, String address, Long phone, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
 }

@@ -24,4 +24,13 @@ public class BorrowerController {
         }
         return borrowers;
     }
+
+    public void addBorrower(Borrower borrower) {
+
+        try {
+            borrowerService.addBorrower(borrower);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
