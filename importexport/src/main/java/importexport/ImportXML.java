@@ -1,5 +1,6 @@
 package importexport;
 
+import enums.BookGenre;
 import models.Book;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -23,7 +24,6 @@ public class ImportXML {
             Workbook workbook = WorkbookFactory.create(new File(FILE_NAME));
             int sheetNumber = workbook.getNumberOfSheets();
 
-
             for(int i = 0; i < sheetNumber; ++i) {
                 Sheet sheet = workbook.getSheetAt(i);
 
@@ -34,11 +34,23 @@ public class ImportXML {
 
                     Row row = sheet.getRow(j);
 
-                    String title = row.getCell(0).getStringCellValue();
+                    String title = row.getCell(CellType.TITLE).getStringCellValue();
                     book.setTitle(title);
 
-                    Date date = row.getCell(1).getDateCellValue();
+                    Date date = row.getCell(CellType.RELEAS).getDateCellValue();
                     book.setPublishDate(date);
+
+                    Double isbn = row.getCell(CellType.ISBN).getNumericCellValue();
+                    book.setIsbn(isbn.longValue());
+
+                    String type = row .getCell(CellType.TITLE).getStringCellValue();
+                    //book.setGenre();
+
+                    Double pages = row.getCell(CellType.PAGES).getNumericCellValue();
+                    book.setNumberOfPages(pages.longValue());
+
+                    String text = row.getCell(CellType.DESCRIPTION).getStringCellValue();
+                    book.setDescription(text);
 
                     books.add(book);
                 }
