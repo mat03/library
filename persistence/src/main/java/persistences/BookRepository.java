@@ -35,11 +35,13 @@ public class BookRepository implements IBookRepository {
 
     @Override
     public void remove(Long id) throws IOException {
-        List<Book> books = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Book>>() {});
+        File jsonFile = new File(JSON_FILEPATH);
+        List<Book> books = OBJECT_MAPPER.readValue(jsonFile, new TypeReference<List<Book>>() {});
 
         for (Book book : books) {
             if(book.getId().equals(id)) {
                 book.setRemoved(true);
+                OBJECT_MAPPER.writeValue(jsonFile, books);
                 return;
             }
         }
@@ -84,6 +86,6 @@ public class BookRepository implements IBookRepository {
     public List<Book> getAll() throws IOException {
         List<Book> books = OBJECT_MAPPER.readValue(new File(JSON_FILEPATH), new TypeReference<List<Book>>() {});
 
-        return books.stream().filter(book -> !book.isBorrowed()).collect(Collectors.toList());
+        return books.stream().filter(book -> !book.isBorrowed()).filter(book -> !book.isRemoved()).collect(Collectors.toList());
     }
 }

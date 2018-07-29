@@ -46,4 +46,14 @@ public class BookController {
             e.printStackTrace();
         }
     }
+
+    public List<Book> allBooks() {
+        List<Book> books = new ArrayList<Book>();
+        try {
+             books = bookService.allBooks();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
 }

@@ -2,8 +2,10 @@ package views.entry;
 
 import enums.BookGenre;
 import models.Author;
+import models.Book;
 import models.Borrow;
 import models.Borrower;
+import org.apache.xmlbeans.impl.jam.mutable.MElement;
 import views.controller.AuthorController;
 import views.controller.BookController;
 import views.controller.BorrowerController;
@@ -49,6 +51,10 @@ public class AplicationMenager {
                 }
                 case ADD_AUTHOR: {
                     state = addAuthorState();
+                    break;
+                }
+                case REMOVE_BOOK: {
+                    state = removeBookState();
                     break;
                 }
                 case EXIT:
@@ -185,10 +191,30 @@ public class AplicationMenager {
     }
 
     public State removeBookState() {
-        Long id = 0L;
-        bookController.removeBook(id);
+        List<Book> books = bookController.allBooks();
+        int bookSize = books.size();
 
-        return  State.EXIT;
+        if(bookSize == 0) {
+            System.out.println(Message.REMOVE_BOOK_EMPTY_LIBRARY);
+            return State.INIT;
+        }
+
+        System.out.println(Message.REMOVE_BOOK);
+
+        for (int i = 0; i < bookSize; ++i) {
+            System.out.println(books.get(i).getId() + " -> " + books.get(i).getTitle() + "\n");
+        }
+
+        Long removeBookIndex = sc.nextLong();
+        sc.nextLine();
+        try {
+            bookController.removeBook(removeBookIndex);
+        }catch (Exception e){
+            System.out.println(Message.REMOVE_BOOK_ID_NOT_EXIST);
+        }
+
+
+        return  State.REMOVE_BOOK;
     }
 
     public State borrowBookState() {
