@@ -1,5 +1,6 @@
 package services;
 
+import importexport.ExportXML;
 import importexport.ImportXML;
 import models.Book;
 import persistences.BookRepository;
@@ -33,11 +34,16 @@ public class BookService implements IBookService {
         return bookRepository.get(id);
     }
 
-    public List<Book> getImportBooks() throws IOException {
+    public List<Book> importBooks() throws IOException {
         ImportXML importXML = new ImportXML();
 
         return importXML.getBookList();
     }
 
+    public void exportBooks(List<Book> books) throws IOException {
+        ExportXML exportXML = new ExportXML();
+
+        exportXML.setBookList(books);
+    }
 
 }

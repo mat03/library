@@ -90,15 +90,23 @@ public class BookController {
         return book;
     }
 
-    public List<Book> getImportBooks() {
+    public List<Book> importBooks() {
         List<Book> books = new ArrayList<Book>();
 
         try {
-            books = bookService.getImportBooks();
+            books = bookService.importBooks();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return books;
+    }
+
+    public void exportBooks(List<Book> books) {
+        try {
+            bookService.exportBooks(books);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

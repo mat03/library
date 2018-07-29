@@ -75,6 +75,7 @@ public class AplicationMenager {
                     break;
                 }
                 case EXPORT_BOOK: {
+                    state = exportBookState();
                     break;
                 }
                 case EXIT:
@@ -336,13 +337,20 @@ public class AplicationMenager {
     }
 
     public State importBookState() {
-        List<Book> books = bookController.getImportBooks();
+        List<Book> books = bookController.importBooks();
 
         int bookNumber = books.size();
 
         for (int i = 0; i < bookNumber; ++i) {
             System.out.println(books.get(i).getTitle() + " -> " + books.get(i).getPublishDate());
         }
+        return State.INIT;
+    }
+
+    public State exportBookState() {
+        List<Book> books = bookController.allBooks();
+
+        bookController.exportBooks(books);
         return State.INIT;
     }
 

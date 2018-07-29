@@ -12,6 +12,7 @@ public interface IBookService {
     void borrowBook(Long id, boolean borrow) throws IOException;
     Book getBook(Long id) throws IOException;
 
-    List<Book> getImportBooks()throws IOException;
+    List<Book> importBooks()throws IOException;
+    void exportBooks(List<Book> books)throws IOException;
 
 }
