@@ -28,4 +28,7 @@ public class Message {
     public static final String REMOVE_BOOK_EMPTY_LIBRARY = "EMPTY LIBRARY";
     public static final String REMOVE_BOOK_ID_NOT_EXIST = "Unknown ID";
 
+    public static final String BORROW_BOOK = "Write 0 to add borrower";
+    public static final String BORROW_BOOK_NO_BORROWER = "Borrower list is empty add someone";
+
 }

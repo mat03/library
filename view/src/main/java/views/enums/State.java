@@ -8,5 +8,6 @@ public enum State {
     REMOVE_BOOK,
     BORROW_BOOK,
     BACK_BOOK,
+    ADD_BORROWER,
     EXIT,
 }

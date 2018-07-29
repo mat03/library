@@ -57,6 +57,14 @@ public class AplicationMenager {
                     state = removeBookState();
                     break;
                 }
+                case BORROW_BOOK: {
+                    state = borrowBookState();
+                    break;
+                }
+                case ADD_BORROWER: {
+                    state = AddBorrowerState();
+                    break;
+                }
                 case EXIT:
                     exitAplication();
             }
@@ -218,14 +226,36 @@ public class AplicationMenager {
     }
 
     public State borrowBookState() {
+        System.out.println(Message.BORROW_BOOK);
         List<Borrower> borrowers = borrowerController.allBorrowers();
+        int borrowerSize = borrowers.size();
 
-        for (Borrower borrower: borrowers) {
-            System.out.println(borrower.toString());
+        if(borrowerSize == 0) {
+            System.out.println(Message.BORROW_BOOK_NO_BORROWER);
+        } else {
+
+            for (Borrower borrower : borrowers) {
+                System.out.println(borrower.toString());
+            }
         }
-        
 
-        return State.EXIT;
+        Long selectOption = sc.nextLong();
+        sc.nextLine();
+
+        if(selectOption == 0) {
+            return State.ADD_BORROWER;
+        }
+
+        return State.INIT;
+    }
+
+    public State AddBorrowerState() {
+        String name, surname, address, email;
+        Long phone;
+        Borrower borrower = new Borrower();
+
+
+        return State.BORROW_BOOK;
     }
 
 }

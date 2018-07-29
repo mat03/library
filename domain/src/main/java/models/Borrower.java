@@ -25,4 +25,7 @@ public class Borrower {
         this.email = email;
         this.remove = false;
     }
+
+    public Borrower() {
+    }
 }
