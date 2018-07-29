@@ -21,4 +21,8 @@ public class BorrowService implements IBorrowService {
     public void remoweBorrow(Long id) throws IOException {
         borrowRepository.remove(id);
     }
+
+    public Borrow getBorrow(Long id) throws IOException {
+        return borrowRepository.get(id);
+    }
 }

@@ -301,13 +301,24 @@ public class AplicationMenager {
         List<Borrow> borrows = borrowControler.allBorrows();
         int borrowSize = borrows.size();
         Book book;
+        Borrow borrow;
+
+        System.out.println(Message.BACK_BOOK_INT);
 
         for (int i = 0; i < borrowSize; ++i) {
             Long bookId = borrows.get(i).getBookId();
             book = bookController.getBook(bookId);
 
-            System.out.println(book.getId() + "->" + book.getTitle());
+            System.out.println(borrows.get(i).getId() + "->" + book.getTitle());
         }
+
+        Long backId = sc.nextLong();
+        sc.nextLine();
+
+        borrow = borrowControler.getBorrow(backId);
+
+        borrowControler.removeBorrow(borrow.getId());
+        bookController.borrowBook(borrow.getBookId(),false);
         return State.INIT;
     }
 

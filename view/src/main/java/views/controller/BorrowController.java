@@ -42,4 +42,14 @@ public class BorrowController {
 
         return borrows;
     }
+
+    public Borrow getBorrow(Long id) {
+        Borrow borrow = new Borrow();
+        try {
+            borrow = borrowService.getBorrow(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return borrow;
+    }
 }

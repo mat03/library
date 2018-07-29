@@ -40,4 +40,6 @@ public class Message {
     public static final String ADD_BORROWER_Phone = "Write Phone";
     public static final String ADD_BORROWER_EMAIL = "Write Email";
 
+    public static final String BACK_BOOK_INT = "Select book to back";
+
 }
