@@ -1,1 +1,1 @@
-[{"id":1,"title":"title","publishDate":"2001-10-10T22:00:00.000+0000","isbn":90,"genre":"Horror","numberOfPages":123,"description":"ale","removed":false,"borrowed":false}]
+[{"id":1,"title":"title","publishDate":"2001-10-10T22:00:00.000+0000","isbn":90,"genre":"Horror","numberOfPages":123,"description":"ale","removed":false,"borrowed":true}]

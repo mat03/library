@@ -8,6 +8,7 @@ import models.Borrower;
 import org.apache.xmlbeans.impl.jam.mutable.MElement;
 import views.controller.AuthorController;
 import views.controller.BookController;
+import views.controller.BorrowController;
 import views.controller.BorrowerController;
 import views.enums.State;
 import views.message.Message;
@@ -26,6 +27,7 @@ public class AplicationMenager {
     private static final BookController bookController = new BookController();
     private static final AuthorController authorController = new AuthorController();
     private static final BorrowerController borrowerController = new BorrowerController();
+    private static final BorrowController borrowControler = new BorrowController();
 
     public AplicationMenager() {
     }
@@ -255,7 +257,7 @@ public class AplicationMenager {
 
         Long bookId = sc.nextLong();
         sc.nextLine();
-
+        bookController.borrowBook(bookId);
 
 
         return State.INIT;

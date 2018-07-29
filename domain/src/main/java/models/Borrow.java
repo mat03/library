@@ -23,4 +23,12 @@ public class Borrow {
         this.borrowerId = borrowerId;
         this.remove = false;
     }
+
+    public Borrow(Long bookId, Long borrowerId) {
+        this.bookId = bookId;
+        this.borrowerId = borrowerId;
+    }
+
+    public Borrow() {
+    }
 }
