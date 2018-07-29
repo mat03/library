@@ -31,7 +31,7 @@ public class Message {
     public static final String BORROW_BOOK = "Write 0 to add borrower";
     public static final String BORROW_BOOK_NO_BORROWER = "Borrower list is empty add someone";
     public static final String BORROW_BOOK_BORROW = "Select book to borrow";
-    public static final String BORROW_BOOK_OK = "USSER_BORROW BOOK";
+    public static final String BORROW_BOOK_OK = "Borrow book ok";
 
     public static final String ADD_BORROWER_NEW = "Add new Borrower";
     public static final String ADD_BORROWER_NAME = "Write Name";

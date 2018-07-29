@@ -11,5 +11,4 @@ public interface IBookRepository {
     void update(Book book) throws IOException;
     Book get(Long id) throws IOException;
     List<Book> getAll() throws IOException;
-    void borrow(Long id) throws IOException;
 }

@@ -5,7 +5,6 @@ import models.Author;
 import models.Book;
 import models.Borrow;
 import models.Borrower;
-import org.apache.xmlbeans.impl.jam.mutable.MElement;
 import views.controller.AuthorController;
 import views.controller.BookController;
 import views.controller.BorrowController;
@@ -64,7 +63,11 @@ public class AplicationMenager {
                     break;
                 }
                 case ADD_BORROWER: {
-                    state = AddBorrowerState();
+                    state = addBorrowerState();
+                    break;
+                }
+                case BACK_BOOK: {
+                    state = backBookState();
                     break;
                 }
                 case EXIT:
@@ -240,10 +243,10 @@ public class AplicationMenager {
             }
         }
 
-        Long selectOption = sc.nextLong();
+        Long userId = sc.nextLong();
         sc.nextLine();
 
-        if(selectOption == 0) {
+        if(userId == 0) {
             return State.ADD_BORROWER;
         }
 
@@ -257,13 +260,15 @@ public class AplicationMenager {
 
         Long bookId = sc.nextLong();
         sc.nextLine();
-        bookController.borrowBook(bookId);
+        bookController.borrowBook(bookId, true);
 
+        System.out.println(Message.BORROW_BOOK_OK);
+        borrowControler.addBorrow(bookId, userId);
 
         return State.INIT;
     }
 
-    public State AddBorrowerState() {
+    public State addBorrowerState() {
         String name, surname, address, email;
         Long phone;
 
@@ -289,6 +294,21 @@ public class AplicationMenager {
         borrowerController.addBorrower(borrower);
 
         return State.BORROW_BOOK;
+    }
+
+    public State backBookState() {
+
+        List<Borrow> borrows = borrowControler.allBorrows();
+        int borrowSize = borrows.size();
+        Book book;
+
+        for (int i = 0; i < borrowSize; ++i) {
+            Long bookId = borrows.get(i).getBookId();
+            book = bookController.getBook(bookId);
+
+            System.out.println(book.getId() + "->" + book.getTitle());
+        }
+        return State.INIT;
     }
 
 }

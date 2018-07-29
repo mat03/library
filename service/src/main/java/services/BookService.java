@@ -22,7 +22,13 @@ public class BookService implements IBookService {
         return bookRepository.getAll();
     }
 
-    public void borrowBook(Long id) throws IOException {
-        bookRepository.borrow(id);
+    public void borrowBook(Long id, boolean borrow) throws IOException {
+        Book book = bookRepository.get(id);
+        book.setBorrowed(borrow);
+        bookRepository.update(book);
+    }
+
+    public Book getBook(Long id) throws IOException {
+        return bookRepository.get(id);
     }
 }

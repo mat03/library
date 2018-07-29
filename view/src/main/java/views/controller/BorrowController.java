@@ -5,6 +5,8 @@ import services.BorrowService;
 import services.IBorrowService;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BorrowController {
     private IBorrowService borrowService = new BorrowService();
@@ -28,5 +30,16 @@ public class BorrowController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Borrow> allBorrows() {
+        List<Borrow> borrows = new ArrayList<Borrow>();
+        try {
+            borrows = borrowService.allBorow();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return borrows;
     }
 }

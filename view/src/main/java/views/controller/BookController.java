@@ -57,7 +57,7 @@ public class BookController {
         return books;
     }
 
-    public void borrowBook(Long id) {
+    public void borrowBook(Long id, boolean borrow) {
         List<Book> books = new ArrayList<Book>();
         try {
             books = bookService.allBooks();
@@ -72,9 +72,21 @@ public class BookController {
         }
 
         try {
-            bookService.borrowBook(id);
+            bookService.borrowBook(id, borrow);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Book getBook(Long id) {
+        Book book = new Book();
+
+        try {
+            book = bookService.getBook(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return book;
     }
 }

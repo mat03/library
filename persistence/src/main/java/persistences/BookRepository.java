@@ -89,17 +89,4 @@ public class BookRepository implements IBookRepository {
         return books.stream().filter(book -> !book.isBorrowed()).filter(book -> !book.isRemoved()).collect(Collectors.toList());
     }
 
-    public void borrow(Long id) throws IOException {
-        File jsonFile = new File(JSON_FILEPATH);
-        List<Book> books = OBJECT_MAPPER.readValue(jsonFile, new TypeReference<List<Book>>() {});
-
-        for (Book book : books) {
-            if(book.getId().equals(id)) {
-                book.setBorrowed(true);
-                OBJECT_MAPPER.writeValue(jsonFile, books);
-                return;
-            }
-        }
-        throw new BookException("Can't borrow ID " + id);
-    }
 }
