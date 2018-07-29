@@ -21,4 +21,8 @@ public class BookService implements IBookService {
     public List<Book> allBooks() throws IOException {
         return bookRepository.getAll();
     }
+
+    public void borrowBook(Long id) throws IOException {
+        bookRepository.borrow(id);
+    }
 }

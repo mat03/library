@@ -56,4 +56,25 @@ public class BookController {
         }
         return books;
     }
+
+    public void borrowBook(Long id) {
+        List<Book> books = new ArrayList<Book>();
+        try {
+            books = bookService.allBooks();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (Book book : books) {
+            if((book.isBorrowed() == true) || (book.isRemoved() == true) ) {
+                throw new BookException("is borrowed can't remowe");
+            }
+        }
+
+        try {
+            bookService.borrowBook(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

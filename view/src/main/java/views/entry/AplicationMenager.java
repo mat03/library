@@ -245,6 +245,19 @@ public class AplicationMenager {
             return State.ADD_BORROWER;
         }
 
+        System.out.println(Message.BORROW_BOOK_BORROW);
+        List<Book> books = bookController.allBooks();
+        int bookSize = books.size();
+
+        for (int i = 0; i < bookSize; ++i) {
+            System.out.println(books.get(i).getId() + " -> " + books.get(i).getTitle() + "\n");
+        }
+
+        Long bookId = sc.nextLong();
+        sc.nextLine();
+
+
+
         return State.INIT;
     }
 
