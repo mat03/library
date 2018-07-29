@@ -89,4 +89,16 @@ public class BookController {
 
         return book;
     }
+
+    public List<Book> getImportBooks() {
+        List<Book> books = new ArrayList<Book>();
+
+        try {
+            books = bookService.getImportBooks();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return books;
+    }
 }

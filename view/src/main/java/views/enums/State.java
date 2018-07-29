@@ -9,5 +9,7 @@ public enum State {
     BORROW_BOOK,
     BACK_BOOK,
     ADD_BORROWER,
+    IMPORT_BOOK,
+    EXPORT_BOOK,
     EXIT,
 }

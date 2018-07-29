@@ -70,6 +70,13 @@ public class AplicationMenager {
                     state = backBookState();
                     break;
                 }
+                case IMPORT_BOOK: {
+                    state = importBookState();
+                    break;
+                }
+                case EXPORT_BOOK: {
+                    break;
+                }
                 case EXIT:
                     exitAplication();
             }
@@ -105,6 +112,12 @@ public class AplicationMenager {
                     return State.BACK_BOOK;
                 }
                 case 5: {
+                    return State.IMPORT_BOOK;
+                }
+                case 6: {
+                    return State.EXPORT_BOOK;
+                }
+                case 7: {
                     return State.EXIT;
                 }
                 default: {
@@ -319,6 +332,17 @@ public class AplicationMenager {
 
         borrowControler.removeBorrow(borrow.getId());
         bookController.borrowBook(borrow.getBookId(),false);
+        return State.INIT;
+    }
+
+    public State importBookState() {
+        List<Book> books = bookController.getImportBooks();
+
+        int bookNumber = books.size();
+
+        for (int i = 0; i < bookNumber; ++i) {
+            System.out.println(books.get(i).getTitle() + " -> " + books.get(i).getPublishDate());
+        }
         return State.INIT;
     }
 

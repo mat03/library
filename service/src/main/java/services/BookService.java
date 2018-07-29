@@ -1,5 +1,6 @@
 package services;
 
+import importexport.ImportXML;
 import models.Book;
 import persistences.BookRepository;
 import persistences.IBookRepository;
@@ -31,4 +32,12 @@ public class BookService implements IBookService {
     public Book getBook(Long id) throws IOException {
         return bookRepository.get(id);
     }
+
+    public List<Book> getImportBooks() throws IOException {
+        ImportXML importXML = new ImportXML();
+
+        return importXML.getBookList();
+    }
+
+
 }
