@@ -13,6 +13,7 @@
         <module>persistence</module>
         <module>service</module>
         <module>view</module>
+        <module>importexport</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
@@ -36,11 +37,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>1.2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.13</version>
         </dependency>
     </dependencies>
 </project>
