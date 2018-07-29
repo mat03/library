@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ExportXML {
-    private static final String FILE_NAME = "./importexport/src/main/resources/export/booksSample.xlsx";
+    private static final String FILE_NAME = "/home/mat03/IdeaProjects/super-library/importexport/src/main/resources/export/booksSample.xlsx";
     private static final String COLUMNS[] = {"title", "releas", "isbn", "type", "pages", "description"};
 
     public ExportXML() {
