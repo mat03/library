@@ -1,7 +1,7 @@
 package importexport;
 
+import enums.BookGenre;
 import models.Book;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -54,7 +54,9 @@ public class ExportXML {
 
                 row.createCell(CellType.TITLE).setCellValue(book.getTitle());
                 row.createCell(CellType.RELEAS).setCellValue(book.getPublishDate());
-                row.createCell(CellType.TYPE).setCellValue(book.getGenre().getText());
+                BookGenre genre = book.getGenre();
+                String genreStr = genre.getText();
+                row.createCell(CellType.TYPE).setCellValue(genreStr);
                 row.createCell(CellType.PAGES).setCellValue(book.getNumberOfPages());
                 row.createCell(CellType.DESCRIPTION).setCellValue(book.getDescription());
             }

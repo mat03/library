@@ -342,7 +342,11 @@ public class AplicationMenager {
         int bookNumber = books.size();
 
         for (int i = 0; i < bookNumber; ++i) {
-            System.out.println(books.get(i).getTitle() + " -> " + books.get(i).getPublishDate());
+            System.out.println(books.get(i).getTitle() + " -> " + books.get(i).getGenre());
+
+            bookController.addBook(books.get(i).getTitle(),books.get(i).getPublishDate(),
+                    books.get(i).getIsbn(), books.get(i).getGenre(),books.get(i).getNumberOfPages(),
+                    books.get(i).getDescription());
         }
         return State.INIT;
     }

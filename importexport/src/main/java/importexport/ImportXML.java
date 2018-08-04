@@ -43,8 +43,8 @@ public class ImportXML {
                     Double isbn = row.getCell(CellType.ISBN).getNumericCellValue();
                     book.setIsbn(isbn.longValue());
 
-                    String type = row .getCell(CellType.TITLE).getStringCellValue();
-                    //book.setGenre();
+                    String type = row .getCell(CellType.TYPE).getStringCellValue();
+                    book.setGenre(BookGenre.valueOf(type));
 
                     Double pages = row.getCell(CellType.PAGES).getNumericCellValue();
                     book.setNumberOfPages(pages.longValue());
