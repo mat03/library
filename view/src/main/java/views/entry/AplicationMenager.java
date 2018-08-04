@@ -205,7 +205,9 @@ public class AplicationMenager {
         isbn = sc.nextLong();
 
         System.out.println(Message.NEW_BOOK_TYPE);
-        //genre = new BookGenre("aaa");
+        System.out.println(java.util.Arrays.asList(BookGenre.values()));
+        String genreStr = sc.next();
+        BookGenre bookGenre = BookGenre.valueOf(genreStr);
 
         System.out.println(Message.NEW_BOOK_NUMBER_PAGE);
         numberOfPages = sc.nextLong();
@@ -213,7 +215,7 @@ public class AplicationMenager {
         System.out.println(Message.NEW_BOOK_DESCRIPTION);
         description = sc.next();
 
-        bookController.addBook(title, date, isbn, Horror, numberOfPages, description);
+        bookController.addBook(title, date, isbn, bookGenre, numberOfPages, description);
         return State.INIT;
     }
 
@@ -342,11 +344,13 @@ public class AplicationMenager {
         int bookNumber = books.size();
 
         for (int i = 0; i < bookNumber; ++i) {
-            System.out.println(books.get(i).getTitle() + " -> " + books.get(i).getGenre());
+            Book book = books.get(i);
+            System.out.println(book.getTitle() + " -> " + book.getGenre());
 
-            bookController.addBook(books.get(i).getTitle(),books.get(i).getPublishDate(),
-                    books.get(i).getIsbn(), books.get(i).getGenre(),books.get(i).getNumberOfPages(),
-                    books.get(i).getDescription());
+            bookController.addBook(
+                    book.getTitle(), book.getPublishDate(),
+                    book.getIsbn(), book.getGenre(),
+                    book.getNumberOfPages(), book.getDescription());
         }
         return State.INIT;
     }
